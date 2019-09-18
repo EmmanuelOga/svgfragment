@@ -29,5 +29,7 @@ To automate the process of creating those SVG elements a bit, a lil bit of JavaS
 
 ## Optimizing the SVG
 
+```sh
 $ yarn global add svgo
 $ svgo --disable=cleanupIDs drawing.svg
+```
