@@ -1,1 +1,60 @@
+<!DOCTYPE html>
+<html>
 
+<head>
+  <style>
+    .svg-fragment {
+      position: absolute;
+    }
+
+    #container {
+      position: relative;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Test</h1>
+
+  <div id='container'>
+  </div>
+</body>
+
+<script>
+  function createSVG(url) {
+    const svgNS = "http://www.w3.org/2000/svg";
+    const xlinkNS = "http://www.w3.org/1999/xlink";
+    const svg = document.createElementNS(svgNS, "svg");
+    const use = document.createElementNS(svgNS, "use");
+    use.setAttributeNS(xlinkNS, "xlink:href", url);
+    svg.appendChild(use);
+    return svg;
+  }
+
+  class SvgFragment {
+    constructor(url, id) {
+      this.element = createSVG(`/${url}#${id}`);
+      this.element.classList.add('svg-fragment');
+    }
+    move(x, y) {
+      this.element.style.left = `${x}rem`;
+      this.element.style.top = `${y}rem`;
+    }
+  }
+
+  const uno = new SvgFragment('drawing.svg', 'uno');
+  const dos = new SvgFragment('drawing.svg', 'dos');
+  const tres = new SvgFragment('drawing.svg', 'tres');
+
+  const container = document.querySelector('#container');
+
+  container.appendChild(uno.element);
+  container.appendChild(dos.element);
+  container.appendChild(tres.element);
+
+  uno.move(10, 0);
+  dos.move(10, 10);
+  tres.move(10, 20);
+</script>
+
+</html>
